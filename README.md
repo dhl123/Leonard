@@ -1,6 +1,12 @@
 # Leonard
 Usenix Security'23
 
+## Requirements
+Keras: 2.4.3
+Tensorflow: 2.4.1
+Numpy: 1.19.5
+
+
 ## Storage
 
 ```shell
