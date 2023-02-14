@@ -17,6 +17,7 @@ import struct
 import models
 import tempfile
 import shutil
+import pickle
 parser = argparse.ArgumentParser(description='Input')
 parser.add_argument('-dataset_flag', action='store', dest='dataset_flag')
 parser.add_argument('-model', action='store', dest='model_weights_file',
@@ -270,18 +271,10 @@ def main():
         o1=edges[3]
         global o2
         o2=edges[2]
-        f=open('/src/workspace/for_spade_db_data/score_trace'+str(args.dataset_flag)+'.txt')
-        score_str=f.read()
-        score_str=score_str.split("\n")
-        score_map={}
-        for i in score_str:
-            tmp_str=i.split(";")
-            score_map[tmp_str[0]]=float(tmp_str[1])
-        data=[]
-        with open('/src/workspace/edge_trace'+str(args.dataset_flag)+'.csv','r') as csvfile:
-            reader = csv.reader(csvfile)
-            for i in reader:
-                data.append(i)
+        f_score=open('score_trace1','rb')
+        score_map=pickle.load(f_score)
+        data=score_map["data"]
+        f_score.close()
         mapp = {}
         G = []
         for i in range(len(o1)):
